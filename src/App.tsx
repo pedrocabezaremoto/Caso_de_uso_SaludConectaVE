@@ -25,7 +25,7 @@ function App() {
         }
     };
 
-    const handleFlowPhaseChange = useCallback((phase: number, useCaseIds: string[], activeActorId?: string) => {
+    const handleFlowPhaseChange = useCallback((_phase: number, useCaseIds: string[], activeActorId?: string) => {
         setIsSimulating(true);
         // Ensure strictly only the active actor is selected to enforce "Spotlight" mode
         if (activeActorId) {

@@ -86,7 +86,7 @@ export default function FlowSimulator({ onPhaseChange, onReset }: FlowSimulatorP
         <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="fixed bottom-8 right-8 z-50 flex items-center gap-2"
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto md:bottom-8 md:right-8 z-50 flex items-center gap-2 w-max"
         >
             {/* Play/Pause Button */}
             <motion.button

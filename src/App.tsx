@@ -60,12 +60,12 @@ function App() {
         const index = actors.findIndex(a => a.id === selectedActor);
         if (index === -1) return 'items-center';
 
-        // Custom alignment classes based on actor position
+        // Custom alignment classes based on actor position - Mobile: simple vertical stack, Desktop: custom spacing
         switch (index) {
-            case 0: return 'items-start pt-4'; // Paciente
-            case 1: return 'items-start pt-32'; // Centro
-            case 2: return 'items-start pt-80'; // Médico
-            case 3: return 'items-end pb-12'; // Sistema (Align to bottom)
+            case 0: return 'items-start md:pt-4'; // Paciente
+            case 1: return 'items-start md:pt-32'; // Centro
+            case 2: return 'items-start md:pt-80'; // Médico
+            case 3: return 'items-end md:pb-12'; // Sistema (Align to bottom)
             default: return 'items-center';
         }
     };
@@ -78,31 +78,31 @@ function App() {
             <motion.header
                 initial={{ opacity: 0, y: -50 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="relative z-10 py-6 px-8"
+                className="relative z-10 py-6 px-4 md:px-8"
             >
-                <div className="bg-white/10 backdrop-blur-md rounded-2xl px-8 py-4 
+                <div className="bg-white/10 backdrop-blur-md rounded-2xl px-4 py-4 md:px-8 
                       border border-white/20 shadow-2xl max-w-7xl mx-auto">
-                    <h1 className="text-3xl md:text-4xl font-bold text-center text-white">
+                    <h1 className="text-xl md:text-4xl font-bold text-center text-white">
                         DIAGRAMA INTERACTIVO CASOS DE USO - SALUDCONECTA VE
                     </h1>
-                    <p className="text-center text-white/80 mt-2 text-sm">
+                    <p className="text-center text-white/80 mt-2 text-xs md:text-sm">
                         Universidad Nacional Experimental de los Llanos Occidentales "Ezequiel Zamora" (UNERG)
                     </p>
                 </div>
             </motion.header>
 
             {/* Main Content */}
-            <div className="relative z-10 px-8 py-8">
+            <div className="relative z-10 px-4 md:px-8 py-4 md:py-8 mb-24 md:mb-0">
                 <div className="max-w-7xl mx-auto">
-                    <div className="grid grid-cols-12 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
                         {/* Actors Column */}
                         <motion.div
                             initial={{ opacity: 0, x: -50 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className="col-span-12 md:col-span-2 flex md:flex-col gap-8 justify-center md:justify-start"
+                            className="col-span-1 md:col-span-2 flex flex-row md:flex-col gap-4 md:gap-8 overflow-x-auto pb-4 md:pb-0 justify-start md:justify-start items-center md:items-stretch scrollbar-hide px-2"
                         >
                             {actors.map((actor, index) => (
-                                <div key={actor.id} className="relative">
+                                <div key={actor.id} className="relative flex-shrink-0">
                                     <motion.div
                                         initial={{ opacity: 0, y: 20 }}
                                         animate={{ opacity: 1, y: 0 }}
@@ -115,17 +115,19 @@ function App() {
                                         />
                                     </motion.div>
 
-                                    {/* Arrow pointing to use cases */}
-                                    <ActorArrow
-                                        isActive={selectedActor === actor.id}
-                                        color={selectedActor === actor.id ? '#10b981' : 'transparent'}
-                                    />
+                                    {/* Arrow pointing to use cases - Hidden on mobile for cleaner look */}
+                                    <div className="hidden md:block">
+                                        <ActorArrow
+                                            isActive={selectedActor === actor.id}
+                                            color={selectedActor === actor.id ? '#10b981' : 'transparent'}
+                                        />
+                                    </div>
                                 </div>
                             ))}
                         </motion.div>
 
                         {/* Use Cases Grid */}
-                        <div className={`col-span-12 md:col-span-10 min-h-[600px] flex ${getUseCaseAlignment()} transition-all duration-500`}>
+                        <div className={`col-span-1 md:col-span-10 min-h-[400px] md:min-h-[600px] flex ${getUseCaseAlignment()} transition-all duration-500`}>
                             <AnimatePresence mode="wait">
                                 {displayedUseCases.length > 0 ? (
                                     <motion.div
@@ -133,7 +135,7 @@ function App() {
                                         initial={{ opacity: 0, scale: 0.9 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.9 }}
-                                        className="w-full flex flex-wrap justify-center gap-8"
+                                        className="w-full flex flex-wrap justify-center gap-4 md:gap-8 content-start md:content-center pb-20 md:pb-0"
                                     >
                                         {displayedUseCases.map((useCase, index) => (
                                             <motion.div
@@ -141,6 +143,7 @@ function App() {
                                                 initial={{ opacity: 0, y: 20 }}
                                                 animate={{ opacity: 1, y: 0 }}
                                                 transition={{ delay: index * 0.1 }}
+                                                className="w-full sm:w-auto flex justify-center"
                                             >
                                                 <UseCaseNode
                                                     useCase={useCase}

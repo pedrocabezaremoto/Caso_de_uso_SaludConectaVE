@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedBackground from './components/AnimatedBackground';
 import ActorCard from './components/ActorCard';
@@ -25,19 +25,20 @@ function App() {
         }
     };
 
-    const handleFlowPhaseChange = (phase: number, useCaseIds: string[], activeActorId?: string) => {
+    const handleFlowPhaseChange = useCallback((phase: number, useCaseIds: string[], activeActorId?: string) => {
         setIsSimulating(true);
-        setHighlightedUseCases(useCaseIds);
+        // Ensure strictly only the active actor is selected to enforce "Spotlight" mode
         if (activeActorId) {
             setSelectedActor(activeActorId);
         }
-    };
+        setHighlightedUseCases(useCaseIds);
+    }, []);
 
-    const handleFlowReset = () => {
+    const handleFlowReset = useCallback(() => {
         setIsSimulating(false);
         setHighlightedUseCases([]);
         setSelectedActor(null);
-    };
+    }, []);
 
     // Filter use cases based on selected actor
     const displayedUseCases = selectedActor

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import type { UseCase } from '../types';
 import { useState } from 'react';
+import { CornerDownRight, ArrowDown } from 'lucide-react';
 
 interface UseCaseNodeProps {
     useCase: UseCase;
@@ -45,6 +46,13 @@ export default function UseCaseNode({ useCase, isHighlighted, relationType, hasN
             onMouseEnter={() => setShowTooltip(true)}
             onMouseLeave={() => setShowTooltip(false)}
         >
+            {/* Mobile Hierarchy Arrow (The "Ramificación" visual) */}
+            {useCase.isChild && (
+                <div className="absolute -left-6 top-0 text-white/40 md:hidden z-0">
+                    <CornerDownRight size={24} />
+                </div>
+            )}
+
             <div
                 className={`
           relative
@@ -113,13 +121,20 @@ export default function UseCaseNode({ useCase, isHighlighted, relationType, hasN
                     </motion.div>
                 )}
 
-                {/* Directional Arrow (hasNext) */}
+                {/* Desktop Directional Arrow (Right) - HIDDEN ON MOBILE */}
                 {hasNext && (
                     <div className="absolute top-1/2 -right-6 transform -translate-y-1/2 z-0 hidden md:block text-white/50">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <line x1="5" y1="12" x2="19" y2="12"></line>
                             <polyline points="12 5 19 12 12 19"></polyline>
                         </svg>
+                    </div>
+                )}
+
+                {/* Mobile Flow Arrow (Down) - HIDDEN ON DESKTOP */}
+                {hasNext && !useCase.isChild && (
+                    <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 md:hidden text-white/30">
+                        <ArrowDown size={16} />
                     </div>
                 )}
             </div>

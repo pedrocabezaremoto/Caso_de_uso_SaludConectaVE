@@ -54,7 +54,7 @@ export default function ActorCard({ actor, isSelected, onClick }: ActorCardProps
                         : '0 0 15px rgba(16, 185, 129, 0.3)',
                 }}
                 className={`
-          w-20 h-20 rounded-full
+          w-16 h-16 md:w-20 md:h-20 rounded-full
           ${colors.bg}
           border-4 ${colors.border}
           flex flex-col items-center justify-center
@@ -63,7 +63,7 @@ export default function ActorCard({ actor, isSelected, onClick }: ActorCardProps
           ${isSelected ? 'ring-4 ring-white/30' : ''}
         `}
             >
-                <Icon className={`w-8 h-8 ${colors.text}`} />
+                <Icon className={`w-7 h-7 md:w-8 md:h-8 ${colors.text}`} />
             </motion.div>
 
             <motion.p

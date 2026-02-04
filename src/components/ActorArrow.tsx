@@ -9,7 +9,7 @@ export default function ActorArrow({ isActive, color }: ActorArrowProps) {
     if (!isActive) return null;
 
     return (
-        <div className="absolute top-1/2 -right-7 transform -translate-y-1/2 z-20 overflow-visible w-12 h-8">
+        <div className="absolute top-1/2 -right-2 transform -translate-y-1/2 z-20 overflow-visible w-12 h-8">
             <svg
                 width="100%"
                 height="100%"

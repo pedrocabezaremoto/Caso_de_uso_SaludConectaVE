@@ -86,7 +86,7 @@ export default function FlowSimulator({ onPhaseChange, onReset }: FlowSimulatorP
         <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="fixed bottom-6 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto md:bottom-8 md:right-8 z-50 flex items-center gap-2 w-max"
+            className="fixed bottom-6 left-4 md:translate-x-0 md:left-auto md:bottom-8 md:right-8 z-50 flex items-center gap-2 w-max"
         >
             {/* Play/Pause Button */}
             <motion.button
@@ -96,11 +96,13 @@ export default function FlowSimulator({ onPhaseChange, onReset }: FlowSimulatorP
                 className={`
                     relative overflow-hidden
                     flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white shadow-xl
-                    transition-all backdrop-blur-md border border-white/20
-                    ${isPlaying
-                        ? 'bg-orange-500 hover:bg-orange-600'
-                        : 'bg-orange-500 hover:bg-orange-600'
-                    }
+                    transition-all backdrop-blur-md
+                    
+                    /* Mobile: Glass Orange (Transparent) */
+                    bg-orange-900/40 border border-orange-500/80
+                    
+                    /* Desktop: Solid Orange */
+                    md:bg-orange-500 md:border-white/20 md:hover:bg-orange-600
                 `}
             >
                 {/* Progress Overlay */}
